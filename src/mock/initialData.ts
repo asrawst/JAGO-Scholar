@@ -6,7 +6,8 @@ import {
   NotificationItem, 
   AuditLogEntry, 
   OutreachCandidate,
-  IntegrationServiceConfig 
+  IntegrationServiceConfig,
+  ChatMessage 
 } from '../types';
 
 export const INITIAL_STUDENT_PROFILE: StudentProfile = {
@@ -540,3 +541,18 @@ export const INITIAL_INTEGRATION_CONFIG: IntegrationServiceConfig = {
   pfmsDbt: 'SUCCESS',
   incomeAuthority: 'SUCCESS'
 };
+
+export const INITIAL_CHAT_MESSAGES: ChatMessage[] = [
+  {
+    id: 'welcome-1',
+    sender: 'jago',
+    text: 'Namaste Rahul! 🙏 I am JAGO, your unified MoTA scholarship assistant. You can ask me anything about your Post-Matric application, DigiLocker verification, or DBT payment status.',
+    textHi: 'नमस्ते राहुल! 🙏 मैं जागो (JAGO) हूँ। आप मुझसे पोस्ट-मैट्रिक आवेदन, डिजिलॉकर सत्यापन, या डीबीटी भुगतान के बारे में कुछ भी पूछ सकते हैं।',
+    timestamp: 'Just now',
+    quickActions: [
+      { label: 'Where is my application?', labelHi: 'मेरा आवेदन कहाँ है?', actionType: 'navigate_tab', payload: 'applications' },
+      { label: 'Am I eligible for Post-Matric?', labelHi: 'क्या मैं पात्र हूँ?', actionType: 'check_eligibility', payload: 'post_matric' },
+      { label: 'Connect DigiLocker', labelHi: 'डिजिलॉकर कनेक्ट करें', actionType: 'navigate_tab', payload: 'documents' }
+    ]
+  }
+];

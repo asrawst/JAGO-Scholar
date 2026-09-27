@@ -23,7 +23,8 @@ import {
   INITIAL_NOTIFICATIONS, 
   INITIAL_AUDIT_LOGS, 
   INITIAL_OUTREACH_CANDIDATES,
-  INITIAL_INTEGRATION_CONFIG 
+  INITIAL_INTEGRATION_CONFIG,
+  INITIAL_CHAT_MESSAGES 
 } from '../mock/initialData';
 import { AuditService } from '../services/auditService';
 import { IntegrationGateway } from '../services/integrationGateway';
@@ -162,20 +163,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Drawers & Modals
   const [isJagoOpen, setIsJagoOpen] = useState<boolean>(false);
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(savedState?.chatMessages || [
-    {
-      id: 'welcome-1',
-      sender: 'jago',
-      text: 'Namaste Rahul! 🙏 I am JAGO, your unified MoTA scholarship assistant. You can ask me anything about your Post-Matric application, DigiLocker verification, or DBT payment status.',
-      textHi: 'नमस्ते राहुल! 🙏 मैं जागो (JAGO) हूँ। आप मुझसे पोस्ट-मैट्रिक आवेदन, डिजिलॉकर सत्यापन, या डीबीटी भुगतान के बारे में कुछ भी पूछ सकते हैं।',
-      timestamp: 'Just now',
-      quickActions: [
-        { label: 'Where is my application?', labelHi: 'मेरा आवेदन कहाँ है?', actionType: 'navigate_tab', payload: 'applications' },
-        { label: 'Am I eligible for Post-Matric?', labelHi: 'क्या मैं पात्र हूँ?', actionType: 'check_eligibility', payload: 'post_matric' },
-        { label: 'Connect DigiLocker', labelHi: 'डिजिलॉकर कनेक्ट करें', actionType: 'navigate_tab', payload: 'documents' }
-      ]
-    }
-  ]);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(savedState?.chatMessages || INITIAL_CHAT_MESSAGES);
 
   const [selectedSchemeForDetail, setSelectedSchemeForDetail] = useState<ScholarshipScheme | null>(null);
   const [isApplyWizardOpen, setIsApplyWizardOpen] = useState<boolean>(false);
@@ -805,6 +793,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setApplications([]);
     setDigiLockerDocs(INITIAL_DIGILOCKER_DOCS);
     setNotifications(INITIAL_NOTIFICATIONS);
+    setChatMessages(INITIAL_CHAT_MESSAGES);
+    setIsJagoOpen(false);
     AuditService.reset();
     setAuditLogs(AuditService.getLogs());
     IntegrationGateway.resetAllToSuccess();
