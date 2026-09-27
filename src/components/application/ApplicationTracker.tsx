@@ -256,7 +256,7 @@ export const ApplicationTracker: React.FC = () => {
                 ? 'bg-emerald-600 text-white'
                 : 'bg-amber-100 text-amber-900'
             }`}>
-              {activeApp.dbtDetails.status === 'Credited' ? 'Credited ✓' : 'In Pipeline'}
+              {activeApp.dbtDetails.status === 'Credited' ? (isHi ? 'खाते में जमा ✓' : 'Credited ✓') : (isHi ? 'प्रक्रियाधीन' : 'Under Process')}
             </span>
           </div>
 
