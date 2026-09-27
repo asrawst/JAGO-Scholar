@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Bell, Globe, ChevronDown, Wifi } from 'lucide-react';
+import { Bell, Globe, ChevronDown } from 'lucide-react';
 import { NotificationDrawer } from '../notifications/NotificationDrawer';
 
 export const TopHeader: React.FC = () => {
@@ -16,26 +16,8 @@ export const TopHeader: React.FC = () => {
   return (
     <>
       <header className="bg-white border-b border-slate-100/80 flex flex-col select-none">
-        {/* Status Bar / Notch Safe Area Area (Prevents overlap with camera notch/Dynamic Island) */}
-        <div className="w-full h-[max(env(safe-area-inset-top,0px),38px)] flex items-end justify-between px-6 pb-1 text-[11px] font-semibold text-slate-800">
-          <span className="font-bold tracking-tight text-slate-900 text-[12px]">9:41</span>
-          <div className="flex items-center space-x-1.5 text-slate-800">
-            {/* Cellular signal bars */}
-            <div className="flex items-end space-x-0.5 h-2.5">
-              <span className="w-0.5 h-1 bg-slate-800 rounded-full"></span>
-              <span className="w-0.5 h-1.5 bg-slate-800 rounded-full"></span>
-              <span className="w-0.5 h-2 bg-slate-800 rounded-full"></span>
-              <span className="w-0.5 h-2.5 bg-slate-800 rounded-full"></span>
-            </div>
-            {/* WiFi icon */}
-            <Wifi className="w-3.5 h-3.5 text-slate-800 stroke-[2.5]" />
-            {/* Battery icon */}
-            <div className="w-5 h-2.5 border border-slate-800 rounded-[3px] p-[1.5px] flex items-center relative">
-              <div className="h-full w-full bg-slate-900 rounded-[1px]"></div>
-              <div className="absolute -right-1 w-0.5 h-1 bg-slate-800 rounded-r-xs"></div>
-            </div>
-          </div>
-        </div>
+        {/* Vacant Safe Area / Notch Spacer to prevent overlap with camera cutout */}
+        <div className="w-full h-[max(env(safe-area-inset-top,0px),38px)] flex-shrink-0" />
 
         {/* Main Header Bar */}
         <div className="px-4 pt-0.5 pb-2.5 flex items-center justify-between">
