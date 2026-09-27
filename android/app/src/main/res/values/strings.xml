@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">JAGO Scholar</string>
+    <string name="title_activity_main">JAGO Scholar</string>
+    <string name="package_name">gov.in.mota.jagoscholar</string>
+    <string name="custom_url_scheme">gov.in.mota.jagoscholar</string>
+</resources>

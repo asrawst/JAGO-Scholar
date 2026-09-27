@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Ashoka Chakra / Sovereign Insignia Motif -->
+  <circle cx="24" cy="24" r="22" fill="#0B1E36" stroke="#D97706" stroke-width="1.5"/>
+  <circle cx="24" cy="24" r="16" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
+  <!-- Central Wheel Spokes -->
+  <circle cx="24" cy="24" r="5" fill="#D97706"/>
+  <circle cx="24" cy="24" r="2" fill="#FFFFFF"/>
+  <!-- Spokes -->
+  <path d="M24 8v32M8 24h32M12.69 12.69l22.62 22.62M12.69 35.31L35.31 12.69" stroke="#F59E0B" stroke-width="1.2" opacity="0.85"/>
+  <!-- Top Sovereign Flag Dot -->
+  <circle cx="24" cy="4" r="2" fill="#EA580C"/>
+  <circle cx="24" cy="44" r="2" fill="#16A34A"/>
+</svg>
