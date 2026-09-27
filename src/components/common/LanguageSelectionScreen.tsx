@@ -46,9 +46,9 @@ export const LanguageSelectionScreen: React.FC<Props> = ({ onContinue }) => {
   };
 
   return (
-    <div className="absolute inset-0 z-50 flex flex-col justify-between h-full bg-white text-slate-900 animate-fade-in p-5 overflow-y-auto overscroll-contain">
+    <div className="absolute inset-0 z-50 flex flex-col justify-between h-full bg-white text-slate-900 animate-fade-in pt-[max(env(safe-area-inset-top,0px),38px)] px-5 pb-5 overflow-y-auto overscroll-contain">
       {/* Top Logo: JAGO Scholar Sovereign Identity */}
-      <div className="flex items-center justify-center pt-3 pb-1 flex-shrink-0">
+      <div className="flex items-center justify-center pt-1 pb-1 flex-shrink-0">
         <img 
           src="/jago_scholar_logo.png" 
           alt="JAGO Scholar" 

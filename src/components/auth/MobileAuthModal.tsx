@@ -183,7 +183,7 @@ export const MobileAuthModal: React.FC<Props> = ({ forcedOpen = false }) => {
       {isAuthenticated && (
         <button
           onClick={() => setIsAuthModalOpen(false)}
-          className="absolute top-4 right-4 p-2 rounded-full transition-all z-20 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800"
+          className="absolute top-10 right-4 p-2 rounded-full transition-all z-20 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800"
           title="Close"
         >
           <X className="w-5 h-5" />
@@ -191,7 +191,7 @@ export const MobileAuthModal: React.FC<Props> = ({ forcedOpen = false }) => {
       )}
 
       {/* Main Form & OTP Section */}
-      <div className="flex-1 px-5 pb-3 pt-6 flex flex-col justify-between">
+      <div className="flex-1 px-5 pb-3 pt-[max(env(safe-area-inset-top,0px),38px)] flex flex-col justify-between">
         {/* Main Login / Registration / OTP Content Block - Top Aligned */}
         <div className="w-full max-w-md mx-auto space-y-4 text-center mt-1 mb-auto">
           {/* Slightly Enlarged Logo */}
