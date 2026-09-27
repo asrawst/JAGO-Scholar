@@ -24,7 +24,6 @@ import { AuditLogModal } from './components/admin/AuditLogModal';
 import { JudgeControlsModal } from './components/admin/JudgeControlsModal';
 import { OnboardingModal } from './components/auth/OnboardingModal';
 import { MobileAuthModal } from './components/auth/MobileAuthModal';
-import { OpeningSplashScreen } from './components/common/OpeningSplashScreen';
 
 import { Bot } from 'lucide-react';
 
@@ -47,21 +46,7 @@ const MainScreenRouter: React.FC = () => {
     setIsDigiLockerModalOpen 
   } = useApp();
 
-  const [showSplash, setShowSplash] = useState(true);
-
-  // 1. Splash Screen Phase (No home screen rendered)
-  if (showSplash) {
-    return (
-      <div className="flex flex-col flex-1 h-full min-h-0 relative overflow-hidden bg-white">
-        <OpeningSplashScreen 
-          autoHideDuration={2000} 
-          onDismiss={() => setShowSplash(false)} 
-        />
-      </div>
-    );
-  }
-
-  // 2. Unauthenticated Phase: Render ONLY Language / Auth Modal (Zero background sneak peak)
+  // 1. Unauthenticated Phase: Render ONLY Language / Auth Modal (Zero background sneak peak)
   if (!isAuthenticated) {
     return (
       <div className="flex flex-col flex-1 h-full min-h-0 relative overflow-hidden bg-white">

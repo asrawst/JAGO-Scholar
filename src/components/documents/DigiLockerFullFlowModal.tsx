@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { 
-  ArrowLeft, 
-  Eye, 
-  EyeOff, 
-  ShieldCheck, 
-  FileText, 
+import {
+  ArrowLeft,
+  Eye,
+  EyeOff,
+  ShieldCheck,
+  FileText,
   X,
   RotateCcw
 } from 'lucide-react';
@@ -19,10 +19,10 @@ interface Props {
 type FlowStep = 'login_mobile' | 'login_aadhaar' | 'otp' | 'security_pin';
 
 export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onComplete }) => {
-  const { 
-    loginWithDigiLocker, 
-    importDigiLockerDoc, 
-    digiLockerDocs, 
+  const {
+    loginWithDigiLocker,
+    importDigiLockerDoc,
+    digiLockerDocs,
     showToast,
     language,
     profile
@@ -33,10 +33,10 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
   const [mobileNum, setMobileNum] = useState<string>('9876543210');
   const [aadhaarNum, setAadhaarNum] = useState<string>('123456789012');
   const [showAadhaar, setShowAadhaar] = useState<boolean>(true);
-  
+
   // OTP state
   const [otpDigits, setOtpDigits] = useState<string[]>(['8', '4', '2', '2', '1', '7']);
-  
+
   // Security PIN state
   const [pinDigits, setPinDigits] = useState<string[]>(['1', '2', '3', '4', '5', '6']);
   const [showPin, setShowPin] = useState<boolean>(false);
@@ -103,7 +103,7 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
 
   return (
     <div className="absolute inset-0 z-50 flex flex-col bg-white text-slate-900 animate-fade-in overflow-hidden">
-      
+
       {/* ========================================================================= */}
       {/* STEP 1A: LOGIN OR CREATE ACCOUNT (Mobile Number) */}
       {/* ========================================================================= */}
@@ -123,7 +123,7 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
               <div className="mt-4 flex flex-col items-center justify-center text-center space-y-1">
                 <div className="flex items-center space-x-1.5">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 17l-4-4h2.5V9h3v4H14l-4 4z"/>
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 17l-4-4h2.5V9h3v4H14l-4 4z" />
                   </svg>
                   <span className="text-2xl font-black text-white tracking-tight">DigiLocker</span>
                 </div>
@@ -213,7 +213,7 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
               <div className="mt-4 flex flex-col items-center justify-center text-center space-y-1">
                 <div className="flex items-center space-x-1.5">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 17l-4-4h2.5V9h3v4H14l-4 4z"/>
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 17l-4-4h2.5V9h3v4H14l-4 4z" />
                   </svg>
                   <span className="text-2xl font-black text-white tracking-tight">DigiLocker</span>
                 </div>
@@ -345,7 +345,7 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
             {/* Resend OTP */}
             <div className="flex items-center justify-between text-xs pt-1">
               <span className="text-slate-500">Didn't receive OTP?</span>
-              <button 
+              <button
                 onClick={() => {
                   setOtpDigits(['8', '4', '2', '2', '1', '7']);
                 }}
@@ -386,11 +386,11 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
 
             {/* Profile Pill Badge */}
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#D32F2F] text-white font-bold flex items-center justify-center text-base shadow-sm">
-                AS
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#EA580C] to-amber-500 text-white font-bold flex items-center justify-center text-base shadow-sm">
+                RK
               </div>
               <div>
-                <h4 className="font-bold text-sm text-slate-900">A***Y* S***H</h4>
+                <h4 className="font-black text-sm text-slate-900 tracking-wider">R***L K***R</h4>
                 <p className="text-[11px] text-slate-500 font-medium">Rahul Kumar (ST Scholar ID)</p>
               </div>
             </div>
@@ -432,14 +432,14 @@ export const DigiLockerFullFlowModal: React.FC<Props> = ({ isOpen, onClose, onCo
             </div>
 
             {/* Face ID / Touch ID Checkbox Card */}
-            <div 
+            <div
               onClick={() => setEnableBiometrics(!enableBiometrics)}
               className="bg-[#F6F4FF] p-3.5 rounded-2xl flex items-center space-x-3 cursor-pointer border border-[#E8E1FF]"
             >
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={enableBiometrics}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="w-4 h-4 rounded text-[#5429FF] accent-[#5429FF]"
               />
               <span className="text-xs font-bold text-slate-800">

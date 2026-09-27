@@ -176,57 +176,32 @@ export const MobileAuthModal: React.FC<Props> = ({ forcedOpen = false }) => {
     );
   }
 
-  const showTopBanner = activeMode === 'login' && !isOtpStep && !isSignupOtpStep;
-
-  // 2. Centered Login / Registration / OTP Form with Rich Palette Header:
+  // 2. Centered Login / Registration / OTP Form:
   return (
-    <div className="absolute inset-0 z-50 flex flex-col justify-between bg-slate-50 text-slate-900 animate-fade-in overflow-y-auto overscroll-contain">
+    <div className="absolute inset-0 z-50 flex flex-col justify-between bg-white text-slate-900 animate-fade-in overflow-y-auto overscroll-contain">
       {/* Close Button if already authenticated */}
       {isAuthenticated && (
         <button
           onClick={() => setIsAuthModalOpen(false)}
-          className={`absolute top-4 right-4 p-2 rounded-full transition-all z-20 ${
-            showTopBanner 
-              ? 'bg-white/15 hover:bg-white/25 text-white' 
-              : 'bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800'
-          }`}
+          className="absolute top-4 right-4 p-2 rounded-full transition-all z-20 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800"
           title="Close"
         >
           <X className="w-5 h-5" />
         </button>
       )}
 
-      {/* Upper Palette Header Section - Only on Login */}
-      {showTopBanner && (
-        <div className="bg-gradient-to-b from-[#07152B] via-[#0E2954] to-[#123970] text-white pt-7 pb-4 px-6 text-center relative overflow-hidden flex-shrink-0 shadow-md">
-          {/* Decorative background ambient glows */}
-          <div className="absolute -top-10 -right-10 w-36 h-36 bg-[#F57C00]/25 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#1D4ED8]/30 rounded-full blur-2xl pointer-events-none" />
-          
-          {/* Sovereign App Emblem */}
-          <div className="relative z-10 flex flex-col items-center space-y-1.5">
-            <div className="bg-white/95 rounded-2xl px-3.5 py-1.5 shadow-lg border border-white/30 flex items-center justify-center">
-              <img 
-                src="/jago_scholar_logo.png" 
-                alt="JAGO Scholar" 
-                className="h-12 w-auto object-contain"
-              />
-            </div>
-            
-            <p className="text-[10px] font-semibold text-amber-300">
-              {language === 'hi' ? 'जनजातीय कार्य मंत्रालय • भारत सरकार' : 'Ministry of Tribal Affairs • Govt of India'}
-            </p>
-          </div>
-          
-          {/* Saffron & Green Accent Line */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#F57C00] via-amber-400 to-[#059669]" />
-        </div>
-      )}
-
       {/* Main Form & OTP Section */}
-      <div className={`flex-1 px-5 pb-3 flex flex-col justify-between ${showTopBanner ? 'pt-3' : 'pt-6 sm:pt-8'}`}>
+      <div className="flex-1 px-5 pb-3 pt-6 flex flex-col justify-between">
         {/* Main Login / Registration / OTP Content Block - Top Aligned */}
-        <div className="w-full max-w-md mx-auto space-y-3.5 text-center mt-1 mb-auto">
+        <div className="w-full max-w-md mx-auto space-y-4 text-center mt-1 mb-auto">
+          {/* Slightly Enlarged Logo */}
+          <div className="flex items-center justify-center pt-2 pb-1">
+            <img 
+              src="/jago_scholar_logo.png" 
+              alt="JAGO Scholar" 
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-sm"
+            />
+          </div>
         {isOtpStep || isSignupOtpStep ? (
           /* ===================== PURE DEDICATED OTP VERIFICATION SCREEN ===================== */
           <div className="space-y-4 animate-fade-in py-2">

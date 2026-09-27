@@ -41,8 +41,8 @@ export const INITIAL_STUDENT_PROFILE: StudentProfile = {
     annualIncome: 180000, // 1.8 Lakhs
     incomeCertificateNo: 'JH-INC-2025-41098',
     incomeCertValidity: '2026-03-31',
-    incomeVerificationStatus: 'pending', // Pending for DigiLocker sync demo!
-    discrepancyNote: 'Certificate pending digital signature validation via DigiLocker.'
+    incomeVerificationStatus: 'verified',
+    discrepancyNote: undefined
   },
   academic: {
     apaarId: '9842-1102-4912',
@@ -275,6 +275,25 @@ export const INITIAL_APPLICATION: ScholarshipApplication = {
 
 export const INITIAL_DIGILOCKER_DOCS: DigiLockerDoc[] = [
   {
+    id: 'DOC-AADHAAR-01',
+    name: 'e-Aadhaar Digital Profile',
+    category: 'identity',
+    source: 'UIDAI',
+    docNumber: 'XXXX-XXXX-8921',
+    issuedDate: '01-Jan-2020',
+    verificationStatus: 'verified',
+    isImported: true,
+    fileSize: '180 KB',
+    issuerOrg: 'Unique Identification Authority of India',
+    previewSnippet: {
+      'Name': 'Rahul Kumar',
+      'DOB': '14/06/2004',
+      'Gender': 'Male',
+      'Address': 'Birsa Munda Nagar, Namkum, Ranchi - 834010',
+      'Aadhaar e-KYC': 'Verified ✓'
+    }
+  },
+  {
     id: 'DOC-ST-01',
     name: 'Scheduled Tribe (ST) Certificate',
     category: 'caste',
@@ -294,6 +313,25 @@ export const INITIAL_DIGILOCKER_DOCS: DigiLockerDoc[] = [
     }
   },
   {
+    id: 'DOC-DOM-01',
+    name: 'Residential / Domicile Certificate',
+    category: 'caste',
+    source: 'Jharkhand e-District (JharSewa)',
+    docNumber: 'JH-DOM-2023-88192',
+    issuedDate: '15-May-2023',
+    verificationStatus: 'verified',
+    isImported: true,
+    fileSize: '290 KB',
+    issuerOrg: 'Circle Officer, Sadar Ranchi',
+    previewSnippet: {
+      'Resident Name': 'Rahul Kumar',
+      'Father Name': 'Mangal Kumar',
+      'District': 'Ranchi',
+      'State': 'Jharkhand',
+      'Status': 'Permanent Resident'
+    }
+  },
+  {
     id: 'DOC-INC-01',
     name: 'Income Certificate (FY 2025-26)',
     category: 'income',
@@ -301,7 +339,7 @@ export const INITIAL_DIGILOCKER_DOCS: DigiLockerDoc[] = [
     docNumber: 'JH-INC-2025-41098',
     issuedDate: '28-May-2025',
     verificationStatus: 'verified',
-    isImported: false, // Ready to import in Demo Flow!
+    isImported: true,
     fileSize: '320 KB',
     issuerOrg: 'Circle Officer, Namkum Ranchi',
     previewSnippet: {
@@ -310,6 +348,43 @@ export const INITIAL_DIGILOCKER_DOCS: DigiLockerDoc[] = [
       'Total Annual Income': '₹ 1,80,000 (One Lakh Eighty Thousand)',
       'Valid Upto': '31-Mar-2026',
       'Certificate Status': 'Active & Verified'
+    }
+  },
+  {
+    id: 'DOC-CBSE-10',
+    name: 'Class X Secondary School Certificate',
+    category: 'academic',
+    source: 'Central Board of Secondary Education (CBSE)',
+    docNumber: 'CBSE-X-2020-54129',
+    issuedDate: '15-Jul-2020',
+    verificationStatus: 'verified',
+    isImported: true,
+    fileSize: '310 KB',
+    issuerOrg: 'CBSE / National Academic Depository',
+    previewSnippet: {
+      'Candidate Name': 'Rahul Kumar',
+      'Roll Number': '44129801',
+      'School': 'Kendriya Vidyalaya Hinoo Ranchi',
+      'CGPA / Aggregate': '8.6 CGPA (81.7%)',
+      'Result Status': 'PASS'
+    }
+  },
+  {
+    id: 'DOC-CBSE-12',
+    name: 'Class XII Senior Secondary Marksheet',
+    category: 'academic',
+    source: 'Central Board of Secondary Education (CBSE)',
+    docNumber: 'CBSE-XII-2022-77192',
+    issuedDate: '22-Jul-2022',
+    verificationStatus: 'verified',
+    isImported: true,
+    fileSize: '340 KB',
+    issuerOrg: 'CBSE / National Academic Depository',
+    previewSnippet: {
+      'Roll Number': '66189201',
+      'School': 'Kendriya Vidyalaya Hinoo Ranchi',
+      'Stream': 'Science (PCM)',
+      'Aggregate Marks': '86.4%'
     }
   },
   {
@@ -328,25 +403,6 @@ export const INITIAL_DIGILOCKER_DOCS: DigiLockerDoc[] = [
       'College': 'Birsa Institute of Tribal Technology',
       'Degree': 'Bachelor of Technology (CSE)',
       'Cumulative GPA': '7.84 / 10.0'
-    }
-  },
-  {
-    id: 'DOC-AADHAAR-01',
-    name: 'e-Aadhaar Digital Profile',
-    category: 'identity',
-    source: 'UIDAI',
-    docNumber: 'XXXX-XXXX-8921',
-    issuedDate: '01-Jan-2020',
-    verificationStatus: 'verified',
-    isImported: true,
-    fileSize: '180 KB',
-    issuerOrg: 'Unique Identification Authority of India',
-    previewSnippet: {
-      'Name': 'Rahul Kumar',
-      'DOB': '14/06/2004',
-      'Gender': 'Male',
-      'Address': 'Birsa Munda Nagar, Namkum, Ranchi - 834010',
-      'Aadhaar e-KYC': 'Verified ✓'
     }
   }
 ];

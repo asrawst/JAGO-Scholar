@@ -89,9 +89,6 @@ export const ApplicationTracker: React.FC = () => {
             <ClipboardList className="w-5 h-5 text-mota-saffron" />
             <span>{isHi ? 'आवेदन ट्रैकिंग एवं भुगतान' : 'Application Tracking & DBT'}</span>
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            {isHi ? 'प्रत्येक चरण का पारदर्शी एवं वास्तविक समय विवरण' : 'Live end-to-end transparent verification pipeline.'}
-          </p>
         </div>
 
         <button
@@ -202,7 +199,7 @@ export const ApplicationTracker: React.FC = () => {
       <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-card-soft space-y-4">
         <h3 className="font-extrabold text-sm text-slate-900 flex items-center space-x-2">
           <ShieldCheck className="w-4 h-4 text-mota-navy" />
-          <span>{isHi ? 'सत्यापन एवं स्वीकृति समयरेखा' : 'End-to-End Verification Pipeline'}</span>
+          <span>{isHi ? 'आवेदन की स्थिति' : 'Application Status'}</span>
         </h3>
 
         <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">

@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { DigiLockerDoc } from '../../types';
 import { DigiLockerConsentModal } from './DigiLockerConsentModal';
+import { FetchDigiLockerDrawer } from './FetchDigiLockerDrawer';
 
 export const DocumentWallet: React.FC = () => {
   const { 
@@ -35,6 +36,7 @@ export const DocumentWallet: React.FC = () => {
   const [previewDoc, setPreviewDoc] = useState<DigiLockerDoc | null>(null);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isFetchingDocs, setIsFetchingDocs] = useState(false);
+  const [isFetchDrawerOpen, setIsFetchDrawerOpen] = useState(false);
 
   const isHi = language === 'hi';
   const isDigiLockerConnected = isAuthenticated || digiLockerDocs.some(d => d.isImported || d.verificationStatus === 'verified') || profile.family.incomeVerificationStatus === 'verified';
@@ -104,46 +106,37 @@ export const DocumentWallet: React.FC = () => {
       </div>
 
       {/* Connect DigiLocker Hero Banner */}
-      <div className="bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-4 shadow-lg space-y-3 relative overflow-hidden">
-        <div className="flex items-start justify-between relative z-10">
-          <div className="space-y-1">
-            <div className="flex items-center space-x-1.5">
-              <span className="text-[10px] font-mono bg-white/10 text-blue-200 px-2 py-0.5 rounded-full uppercase font-bold border border-white/10">
-                National Document Depository
+      <div className="bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-4 shadow-lg space-y-2.5 relative overflow-hidden">
+        <div className="relative z-10 space-y-1.5">
+          <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+            <span className="text-[10px] font-mono bg-white/10 text-blue-200 px-2.5 py-0.5 rounded-full uppercase font-bold border border-white/10 whitespace-nowrap">
+              National Document Depository
+            </span>
+            {isDigiLockerConnected && (
+              <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/30 inline-flex items-center space-x-1 whitespace-nowrap">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                <span>{isHi ? 'कनेक्टेड' : 'Connected ✓'}</span>
               </span>
-              {isDigiLockerConnected && (
-                <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center space-x-1">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                  <span>{isHi ? 'कनेक्टेड' : 'Connected ✓'}</span>
-                </span>
-              )}
-            </div>
-            <h3 className="font-extrabold text-base text-white">
-              {isHi ? 'डिजिलॉकर सरकारी एकीकरण' : 'DigiLocker Integration'}
-            </h3>
-            <p className="text-xs text-blue-200 leading-relaxed max-w-xs">
-              {isHi 
-                ? 'सरकारी जारीकर्ता से सीधे डिजिटल हस्ताक्षर युक्त प्रमाण पत्र प्राप्त करें।' 
-                : 'Directly fetch digitally signed certificates with legal validity under IT Act 2000.'}
-            </p>
+            )}
           </div>
-
-          <div className="w-10 h-10 rounded-2xl bg-white text-blue-900 font-black text-sm flex items-center justify-center shadow-md flex-shrink-0">
-            DL
-          </div>
+          <h3 className="font-extrabold text-base text-white">
+            {isHi ? 'डिजिलॉकर सरकारी एकीकरण' : 'DigiLocker Integration'}
+          </h3>
+          <p className="text-xs text-blue-200 leading-relaxed">
+            {isHi 
+              ? 'सरकारी जारीकर्ता से सीधे डिजिटल हस्ताक्षर युक्त प्रमाण पत्र प्राप्त करें।' 
+              : 'Directly fetch digitally signed certificates with legal validity under IT Act 2000.'}
+          </p>
         </div>
 
         {isDigiLockerConnected ? (
           <button
-            onClick={handleFetchDocuments}
-            disabled={isFetchingDocs}
-            className="w-full bg-gradient-to-r from-amber-400 to-mota-saffron hover:from-amber-500 hover:to-orange-600 text-slate-950 font-black py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center space-x-2 shadow-md active:scale-98 transition-all disabled:opacity-80"
+            onClick={() => setIsFetchDrawerOpen(true)}
+            className="w-full bg-gradient-to-r from-amber-400 to-mota-saffron hover:from-amber-500 hover:to-orange-600 text-slate-950 font-black py-2.5 px-4 rounded-2xl text-xs flex items-center justify-center space-x-2 shadow-md active:scale-98 transition-all"
           >
-            <Loader2 className={`w-4 h-4 text-slate-950 ${isFetchingDocs ? 'animate-spin' : ''}`} />
+            <FolderLock className="w-4 h-4 text-slate-950" />
             <span>
-              {isFetchingDocs 
-                ? (isHi ? 'डिजिलॉकर से दस्तावेज प्राप्त हो रहे हैं...' : 'Fetching Documents from Depository...') 
-                : (isHi ? 'दस्तावेज़ प्राप्त करें' : 'Fetch Documents')}
+              {isHi ? 'दस्तावेज़ प्राप्त करें (डिजिलॉकर)' : 'Fetch Documents'}
             </span>
           </button>
         ) : (
@@ -345,6 +338,12 @@ export const DocumentWallet: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Sliding Window from Bottom: Fetch DigiLocker Documents */}
+      <FetchDigiLockerDrawer 
+        isOpen={isFetchDrawerOpen} 
+        onClose={() => setIsFetchDrawerOpen(false)} 
+      />
     </div>
   );
 };

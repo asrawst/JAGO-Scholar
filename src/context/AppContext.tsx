@@ -64,6 +64,7 @@ interface AppContextType {
 
   // Actions & Workflows
   importDigiLockerDoc: (docId: string, silent?: boolean) => Promise<boolean>;
+  importBatchDigiLockerDocs: (docIds: string[], silent?: boolean) => Promise<boolean>;
   submitApplication: (schemeId: SchemeId, academicYear: string) => Promise<ScholarshipApplication>;
   advanceApplicationStage: (appId: string, nextStage: ApplicationStage, officerName: string, remarks?: string) => void;
   resolveDeficiency: (appId: string, deficiencyId: string, resolutionNote: string) => void;
@@ -111,14 +112,14 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'JAGO_SCHOLAR_MOBILE_STATE_V2';
+const LOCAL_STORAGE_KEY = 'JAGO_SCHOLAR_MOBILE_STATE_V4';
 
 const loadPersistedState = () => {
   try {
-    // Clear legacy v1 state if exists so stale pre-applied scholarship is cleared
-    if (localStorage.getItem('JAGO_SCHOLAR_MOBILE_STATE_V1')) {
-      localStorage.removeItem('JAGO_SCHOLAR_MOBILE_STATE_V1');
-    }
+    // Clear all legacy state keys so latest 7/7 verified certificates load fresh on web
+    ['JAGO_SCHOLAR_MOBILE_STATE_V1', 'JAGO_SCHOLAR_MOBILE_STATE_V2', 'JAGO_SCHOLAR_MOBILE_STATE_V3'].forEach(k => {
+      if (localStorage.getItem(k)) localStorage.removeItem(k);
+    });
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (raw) {
       return JSON.parse(raw);
@@ -142,7 +143,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [profile, setProfile] = useState<StudentProfile>(savedState?.profile || INITIAL_STUDENT_PROFILE);
   const [schemes] = useState<ScholarshipScheme[]>(SCHOLARSHIP_SCHEMES);
   const [applications, setApplications] = useState<ScholarshipApplication[]>(savedState?.applications !== undefined ? savedState.applications : []);
-  const [digiLockerDocs, setDigiLockerDocs] = useState<DigiLockerDoc[]>(savedState?.digiLockerDocs || INITIAL_DIGILOCKER_DOCS);
+  const [digiLockerDocs, setDigiLockerDocs] = useState<DigiLockerDoc[]>(() => {
+    if (savedState?.digiLockerDocs && savedState.digiLockerDocs.length >= 7) {
+      return savedState.digiLockerDocs;
+    }
+    return INITIAL_DIGILOCKER_DOCS;
+  });
   const [notifications, setNotifications] = useState<NotificationItem[]>(savedState?.notifications || INITIAL_NOTIFICATIONS);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => {
     if (savedState?.auditLogs) {
@@ -438,6 +444,56 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         type: 'success',
         title: 'Document Verified via DigiLocker',
         message: `${doc?.name} successfully imported & digitally verified (100% reusable).`
+      });
+    }
+
+    return true;
+  };
+
+  // Batch DigiLocker Import Flow for individual/multiple selected checkboxes
+  const importBatchDigiLockerDocs = async (docIds: string[], silent: boolean = false): Promise<boolean> => {
+    if (!docIds || docIds.length === 0) return true;
+
+    const res = await IntegrationGateway.executeMockCall('digiLocker', 'DigiLocker Bulk Sync', true, 0);
+    if (!res.success) {
+      if (!silent) {
+        showToast({
+          type: 'error',
+          title: 'DigiLocker Sync Error',
+          message: res.error || 'Failed to retrieve signed certificates from DigiLocker.'
+        });
+      }
+      return false;
+    }
+
+    setDigiLockerDocs(prev => prev.map(d => docIds.includes(d.id) ? { ...d, isImported: true, verificationStatus: 'verified' } : d));
+
+    const includesIncome = digiLockerDocs.some(d => docIds.includes(d.id) && d.category === 'income');
+    if (includesIncome) {
+      updateProfile({
+        family: {
+          ...profile.family,
+          incomeVerificationStatus: 'verified',
+          discrepancyNote: undefined
+        }
+      });
+    }
+
+    AuditService.logAction({
+      actor: 'Rahul Kumar (Student)',
+      role: 'Student Applicant',
+      action: `Imported & Verified ${docIds.length} Certificate(s) via DigiLocker Gateway`,
+      targetId: docIds.join(','),
+      oldState: 'unverified',
+      newState: 'verified'
+    });
+    setAuditLogs(AuditService.getLogs());
+
+    if (!silent) {
+      showToast({
+        type: 'success',
+        title: 'Certificates Added to Wallet',
+        message: `${docIds.length} official document(s) digitally fetched and added to your wallet.`
       });
     }
 
@@ -790,6 +846,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         integrationConfig,
         updateIntegrationConfig,
         importDigiLockerDoc,
+        importBatchDigiLockerDocs,
         submitApplication,
         advanceApplicationStage,
         resolveDeficiency,

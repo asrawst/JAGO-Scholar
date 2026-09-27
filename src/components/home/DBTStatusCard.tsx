@@ -16,24 +16,24 @@ export const DBTStatusCard: React.FC = () => {
       aria-label="Aadhaar DBT Seeding Status"
       className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-2xl p-3.5 flex items-center justify-between shadow-2xs hover:border-emerald-300 transition-all"
     >
-      <div className="flex items-center space-x-2.5 min-w-0 flex-1 pr-2">
+      <div className="flex items-center space-x-2.5 min-w-0 flex-1">
         {/* Bank / Landmark Icon */}
-        <div className="w-9 h-9 rounded-xl bg-[#DCFCE7] text-[#0B9F6E] flex items-center justify-center flex-shrink-0">
-          <Landmark className="w-5 h-5 stroke-[2]" />
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#DCFCE7] text-[#0B9F6E] flex items-center justify-center flex-shrink-0">
+          <Landmark className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-center space-x-2 flex-wrap gap-y-0.5">
-            <span className="font-bold text-sm text-[#10213F]">
+          <div className="flex items-center space-x-1.5 flex-nowrap">
+            <span className="font-bold text-[13px] text-[#10213F] whitespace-nowrap">
               {isHi ? 'आधार डीबीटी सीडिंग' : 'Aadhaar DBT Seeding'}
             </span>
-            <span className="text-[10px] font-bold bg-[#DCFCE7] text-[#0B9F6E] px-2 py-0.5 rounded-full border border-[#86EFAC] flex items-center space-x-1">
-              <ShieldCheck className="w-2.5 h-2.5 inline stroke-[2.5]" />
+            <span className="text-[9.5px] font-bold bg-[#DCFCE7] text-[#0B9F6E] px-1.5 py-0.5 rounded-full border border-[#86EFAC] inline-flex items-center space-x-0.5 whitespace-nowrap flex-shrink-0">
+              <ShieldCheck className="w-2.5 h-2.5 stroke-[2.5]" />
               <span>{isDbtActive ? 'NPCI Active' : 'Verification In Progress'}</span>
             </span>
           </div>
 
-          <p className="text-[11px] text-[#5B6B83] mt-0.5 truncate font-medium">
+          <p className="text-[10.5px] text-[#5B6B83] mt-0.5 truncate font-medium">
             {bankName} • {maskedAcc} • APBS Verified
           </p>
         </div>

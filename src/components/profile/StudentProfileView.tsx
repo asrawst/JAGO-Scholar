@@ -51,28 +51,17 @@ export const StudentProfileView: React.FC = () => {
       </div>
 
       {/* Completion Badge Banner */}
-      <div className="bg-gradient-to-r from-mota-navy to-slate-900 text-white rounded-3xl p-4 shadow-md space-y-3">
+      <div className="bg-gradient-to-br from-[#EBF5FE] via-[#F1F8FF] to-[#DDEFFE] rounded-3xl p-4 shadow-sm border border-[#BFDBFE]/80">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-mota-saffron to-amber-300 flex items-center justify-center font-black text-mota-navy text-lg shadow-md">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#EA580C] via-[#F97316] to-[#FBBF24] flex items-center justify-center font-black text-white text-lg shadow-sm">
               {profile.name[0]}
             </div>
             <div>
-              <h3 className="font-extrabold text-sm text-white">{profile.name}</h3>
-              <p className="text-xs text-slate-300">{profile.social.tribeCommunity} Tribe • {profile.address.district}, {profile.address.state}</p>
+              <h3 className="font-extrabold text-sm text-[#0B2A55]">{profile.name}</h3>
+              <p className="text-xs text-[#5B6B83] font-medium">{profile.social.tribeCommunity} Tribe • {profile.address.district}, {profile.address.state}</p>
             </div>
           </div>
-        </div>
-
-        {/* Breakdown pills */}
-        <div className="pt-2 border-t border-white/10 grid grid-cols-5 gap-1 text-[10px] text-center font-semibold">
-          <div className="bg-white/10 py-1 rounded-lg text-emerald-300">Identity ✓</div>
-          <div className="bg-white/10 py-1 rounded-lg text-emerald-300">ST Caste ✓</div>
-          <div className="bg-white/10 py-1 rounded-lg text-emerald-300">Academic ✓</div>
-          <div className={`py-1 rounded-lg ${isIncomePending ? 'bg-amber-500/30 text-amber-300 border border-amber-500/40' : 'bg-white/10 text-emerald-300'}`}>
-            Income {isIncomePending ? '⏳' : '✓'}
-          </div>
-          <div className="bg-white/10 py-1 rounded-lg text-emerald-300">Bank ✓</div>
         </div>
       </div>
 
@@ -89,7 +78,7 @@ export const StudentProfileView: React.FC = () => {
                 {isHi ? 'केंद्रीय सत्यापन केंद्र' : 'Central Verification Center'}
               </h3>
               <p className="text-[10px] text-slate-500">
-                {isIncomePending ? '4 of 5 Credentials Verified' : 'All 5 Credentials Verified ✓'}
+                {isIncomePending ? '6 of 7 Credentials Verified' : 'All 7 Credentials Verified ✓'}
               </p>
             </div>
           </div>
@@ -98,7 +87,7 @@ export const StudentProfileView: React.FC = () => {
 
         {expandedSection === 'verification_center' && (
           <div className="p-4 space-y-3 animate-fade-in text-xs">
-            {/* Identity */}
+            {/* 1. Identity */}
             <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
               <div className="flex items-center space-x-2 min-w-0 flex-1">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
@@ -110,7 +99,7 @@ export const StudentProfileView: React.FC = () => {
               <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
             </div>
 
-            {/* ST Certificate */}
+            {/* 2. ST Certificate */}
             <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
               <div className="flex items-center space-x-2 min-w-0 flex-1">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
@@ -122,7 +111,19 @@ export const StudentProfileView: React.FC = () => {
               <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
             </div>
 
-            {/* Income Certificate */}
+            {/* 3. Domicile / Residential Certificate */}
+            <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+              <div className="flex items-center space-x-2 min-w-0 flex-1">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <span className="font-bold text-slate-800 block truncate">Residential / Domicile Certificate</span>
+                  <p className="text-[10px] text-slate-500 truncate">Ranchi, Jharkhand • JH-DOM-2023-88192</p>
+                </div>
+              </div>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
+            </div>
+
+            {/* 4. Income Certificate */}
             <div className={`p-3 rounded-2xl border ${isIncomePending ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-200'} space-y-2`}>
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center space-x-2 min-w-0 flex-1">
@@ -140,40 +141,39 @@ export const StudentProfileView: React.FC = () => {
                   {isIncomePending ? 'Pending Sync' : 'Verified ✓'}
                 </span>
               </div>
-
-              {isIncomePending && (
-                <div className="pt-1 flex items-center justify-between text-[11px] border-t border-amber-200/80">
-                  <span className="text-amber-800">Connect DigiLocker to auto-validate:</span>
-                  <button
-                    onClick={() => setIsDigiLockerModalOpen(true)}
-                    className="bg-[#F57C00] hover:bg-amber-600 text-white font-bold px-2.5 py-1 rounded-lg text-[10px] flex items-center space-x-1 whitespace-nowrap"
-                  >
-                    <span>Sync Certificate</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
-                </div>
-              )}
             </div>
 
-            {/* Academic Record */}
+            {/* 5. Class X Certificate */}
             <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
               <div className="flex items-center space-x-2 min-w-0 flex-1">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <span className="font-bold text-slate-800 block truncate">Academic & APAAR ID Record</span>
-                  <p className="text-[10px] text-slate-500 truncate">APAAR: {profile.academic.apaarId} • AISHE: {profile.academic.aisheCode}</p>
+                  <span className="font-bold text-slate-800 block truncate">Class X Secondary School Certificate</span>
+                  <p className="text-[10px] text-slate-500 truncate">CBSE • 8.6 CGPA (81.7%) • CBSE-X-2020-54129</p>
                 </div>
               </div>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
             </div>
 
-            {/* Bank & DBT */}
+            {/* 6. Class XII Certificate */}
             <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
               <div className="flex items-center space-x-2 min-w-0 flex-1">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <span className="font-bold text-slate-800 block truncate">Bank Account & DBT Seeding</span>
-                  <p className="text-[10px] text-slate-500 truncate">{profile.bank.bankName} ({profile.bank.accountNoMasked}) • NPCI Active</p>
+                  <span className="font-bold text-slate-800 block truncate">Class XII Senior Secondary Marksheet</span>
+                  <p className="text-[10px] text-slate-500 truncate">CBSE Science • 86.4% • CBSE-XII-2022-77192</p>
+                </div>
+              </div>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
+            </div>
+
+            {/* 7. Academic APAAR & Bank Record */}
+            <div className="p-2.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+              <div className="flex items-center space-x-2 min-w-0 flex-1">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <span className="font-bold text-slate-800 block truncate">APAAR Academic ID & Bank DBT</span>
+                  <p className="text-[10px] text-slate-500 truncate">APAAR: {profile.academic.apaarId} • SBI ({profile.bank.accountNoMasked}) APBS Active</p>
                 </div>
               </div>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 inline-flex items-center">Verified ✓</span>
